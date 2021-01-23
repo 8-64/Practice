@@ -1,0 +1,24 @@
+=pod
+
+=encoding UTF-8
+
+=head1 DESCRIPTION
+
+Some practice.
+
+Solutions of some task from H8k, C6y and such
+
+=head1 AUTHORS
+
+Vasyl, 2019-2021
+
+=head1 CONTRIBUTING
+
+Feel free to
+
+=head1 COPYRIGHT AND LICENSE
+
+This project is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
