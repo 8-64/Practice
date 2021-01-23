@@ -16,7 +16,6 @@ sub triplets {
 
     my $total = 0;
     foreach my $el (@second) {
-        my ($f_count, $t_count) = (0, 0);
         my $fp = bin_find(\@first, $el);
         next if ($fp == -1);
         my $tp = bin_find(\@third, $el);
