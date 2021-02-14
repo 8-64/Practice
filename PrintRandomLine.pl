@@ -21,7 +21,7 @@ given (scalar @ARGV) {
     }
 
     # 1 and is a file -> print one line from it
-    when ($_ == 1 and -r -e $ARGV[0]) { say &GetLineFrom($ARGV[0]); say scalar @ARGV }
+    when ($_ == 1 and -r -e $ARGV[0]) { say &GetLineFrom($ARGV[0]) }
 
     # 2 -> first should be a file, second - number of lines
     when ($_ == 2 and -r -e $ARGV[0] and $ARGV[1] =~ /^-{0,}[0-9]+$/) {
