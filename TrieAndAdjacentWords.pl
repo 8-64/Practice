@@ -88,7 +88,7 @@ ok([ subwords($trie, 'football') ] ~~ ["foot", "ball"], '["foo", "foot", "ball"]
 ok([ subwords($trie, 'butterfly') ] ~~ [], '["foo", "foot", "ball"], "butterfly" -> no match');
 
 ok([ subwords($trie, 'footballfootball') ] ~~ ['foot', 'ball', 'foot', 'ball'], '["foo", "foot", "ball"], "footballfootball" -> ["foot", "ball", "foot", "ball"]');
-ok([ subwords($trie, 'footballfoootball') ] ~~ [], '["foo", "foot", "ball"], "["foo", "foot", "ball"], "footballfootball" -> no match');
+ok([ subwords($trie, 'footballfoootball') ] ~~ [], '["foo", "foot", "ball"], "["foo", "foot", "ball"], "footballfoootball" -> no match');
 
 my $another_trie = Trie->new;
 $another_trie->add($_) foreach (qw[foo ball]);
