@@ -115,6 +115,6 @@ TODO: some test cases + tests driver.
     my $report = $graph->allDistancesFrom($root);
 
     my $mst = $graph->mst($starting);
-    say $mst->sumOf('weight')
+    say $mst->sumOf('weight');
 
 =cut

@@ -17,13 +17,13 @@ package Graph {
   }
 
   # Add a bidirectional edge
-  sub addTwoSide ($self, $first, $second) {
+  sub add ($self, $first, $second) {
     $self->{nodes}->{$first}->{$second}++;
     $self->{nodes}->{$second}->{$first}++;
   }
 
   # Add a unidirected edge
-  sub addOneSide ($self, $first, $second) {
+  sub addDirected ($self, $first, $second) {
     $self->{nodes}->{$first}->{$second}++;
   }
 
@@ -64,7 +64,7 @@ use List::Util 'min';
 
 my $graph = Graph->new;
 $graph->enumerate('A', 'D');
-$graph->addOneSide(@$_) foreach(
+$graph->addDirected(@$_) foreach(
     [A => 'B'],
     [B => 'C'],
     [C => 'D'],
