@@ -14,7 +14,6 @@ my $data = Decode(&GetData);
 my $request = Decode(&GetRequest);
 my $responce = Available($data, $request);
 @$responce = sort { $a->{price} <=> $b->{price} } @$responce;
-# TODO: Duplicates?
 say Encode($responce);
 
 exit 0;
@@ -27,9 +26,15 @@ sub Available ($data, $request) {
     foreach my $day (($checkin + 1)..($checkout - 1)) {
         my $applicables = FilterHotels($data->{$day}, $request);
         my @until_today;
+        my %seen_today;
         while (my $result = pop @results) {
             foreach my $block (@$applicables) {
-                push(@until_today, MergeRooms($result, $block));
+                my $alternative = MergeRooms($result, $block);
+                # Keep only unique combinations
+                my $unique_key = join('-', $alternative->@{'price', 'availability', 'features'});
+                next if $seen_today{$unique_key}++;
+                $alternative->{features} = MaskToFeatures($alternative->{features});
+                push(@until_today, $alternative);
             }
         }
         @results = @until_today;
@@ -38,11 +43,12 @@ sub Available ($data, $request) {
     wantarray? @results : \@results;
 }
 
+# Merge alternative and a hotel. Features are expected to be decoded outside of this sub
 sub MergeRooms ($result, $block) {
     $result = { %$result };
     $result->{price}        += $block->{price};
     $result->{availability} = min($result->{availability}, $block->{availability});
-    $result->{features}     = MaskToFeatures(FeatureMask($result->{features}->@*) & FeatureMask($block->{features}->@*));
+    $result->{features}     = FeatureMask($result->{features}->@*) & FeatureMask($block->{features}->@*);
     $result;
 }
 
