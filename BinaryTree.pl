@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 use v5.23;
 use feature ':all';
 use warnings; no warnings 'experimental';
@@ -29,7 +31,7 @@ package BinTree {
         return $self if defined wantarray;
     }
 
-    # Dump the tree contents in rewuested direction
+    # Dump the tree contents in requested direction
     sub dump ($self, $from = 'left', $to = 'right', $collection = []) {
         $self->{$from}->dump($from, $to, $collection) if (exists $self->{$from});
         push (@$collection, $self->{value});
